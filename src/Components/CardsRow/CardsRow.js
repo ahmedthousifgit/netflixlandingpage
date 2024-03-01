@@ -1,9 +1,22 @@
-import React from "react";
-
+import axios from "../../axios";
+import React, { useEffect, useState } from "react";
+import { API_KEY } from "../../constants/constants";
 function CardsRow() {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`discover/tv?api_key=${API_KEY}&with_networks=213`)
+      .then((response) => {
+        setMovies(response.data.results[1]);
+      })
+      .catch((err) => {
+        alert("network error");
+      });
+  }, []);
+
   return (
     <div className="row">
-      <h2>Title</h2>
+      <h2></h2>
       <div className="posters">
         <img
           className="poster"

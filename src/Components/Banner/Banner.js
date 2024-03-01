@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { API_KEY, imageUrl } from "../../constants/constants";
 
+import axios from "../../axios";
 function Banner() {
+  const [movie, setMovie] = useState();
+  useEffect(() => {
+    axios
+      .get(`trending/all/week?api_key=${API_KEY}&language=en-US`)
+      .then((response) => {
+        console.log(response.data.results[1]);
+        setMovie(response.data.results[1]);
+      });
+  }, []);
   return (
-    <div className="banner">
+    <div
+      className="banner"
+      style={{
+        backgroundImage: `url(${movie ? imageUrl + movie.backdrop_path : " "})`,
+      }}
+    >
       <div className="content">
-        <h1 className="title"> Movie name</h1>
+        <h1 className="title">{movie ? movie.title : ""}</h1>
         <div className="banner-buttons">
           <button className="button">Play</button>
           <button className="button">My List</button>
         </div>
-        <h1 className="description">When their mother takes off on a business trip, two bickering brothers unite to secretly attend the hottest party of the year before she returns.</h1>
+        <h1 className="description">{movie ? movie.overview : ""}</h1>
       </div>
-      <div className="fade_bottom">
-        
-      </div>
+      <div className="fade_bottom"></div>
     </div>
   );
 }
