@@ -1,6 +1,7 @@
 import './App.css';
 import Banner from './Components/Banner/Banner';
 import Nav from './Components/NavBar/Nav';
+import {Orginals,action} from './urls'
 import './Components/NavBar/Nav.css'
 import './Components/Banner/Banner.css'
 import CardsRow from './Components/CardsRow/CardsRow';
@@ -11,7 +12,8 @@ function App() {
     <div className="App">
       <Nav/>
       <Banner/>
-      <CardsRow/>
+      <CardsRow url={Orginals}  title="Netflix Orginals" imageUrl=""/>
+      <CardsRow  url={action} title="Action" isSmall  />
     </div>
   );
 }
